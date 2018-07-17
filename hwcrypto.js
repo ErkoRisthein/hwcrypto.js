@@ -1,7 +1,8 @@
-/*! This is hwcrypto.js 0.0.13 generated on 2018-02-25 */
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.hwcrypto = f()}})(function(){var define,module,exports;module={exports:(exports={})};
+/*! This is hwcrypto.js 0.0.14 generated on 2018-07-17 */
 /* DO NOT EDIT (use src/hwcrypto.js) */
 
-var hwcrypto = function hwcrypto() {
+module.exports = function hwcrypto() {
     "use strict";
     var _debug = function(x) {};
     _debug("hwcrypto.js activated");
@@ -270,7 +271,7 @@ var hwcrypto = function hwcrypto() {
     };
     fields.debug = function() {
         return new Promise(function(resolve, reject) {
-            var hwversion = "hwcrypto.js 0.0.13";
+            var hwversion = "hwcrypto.js 0.0.14";
             _autodetect().then(function(result) {
                 _backend.getVersion().then(function(version) {
                     resolve(hwversion + " with " + _backend._name + " " + version);
@@ -327,3 +328,5 @@ var hwcrypto = function hwcrypto() {
     fields.INVALID_ARGUMENT = INVALID_ARGUMENT;
     return fields;
 }();
+return module.exports;});
+

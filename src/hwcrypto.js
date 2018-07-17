@@ -1,6 +1,6 @@
 // JavaScript library as described in
 // https://github.com/open-eid/hwcrypto.js
-var hwcrypto = (function hwcrypto() {
+module.exports = (function hwcrypto() {
     'use strict';
     var _debug = function(x) {
         // console.log(x);

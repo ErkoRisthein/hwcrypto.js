@@ -39,6 +39,8 @@ For background information about the project and other volatile information, ple
 For any bugs and enhancements, please open an issue on Github. For issues with specific backends, please file tickets with backend components.
 
 ## ChangeLog
+- 0.0.14
+  - Add Universal Module Definition conversion
 - 0.0.12
   - IE Plugin 3.13.0 supports info and filter parameter
 - 0.0.11

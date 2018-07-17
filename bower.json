@@ -4,7 +4,7 @@
     "hwcrypto.js",
     "hwcrypto-legacy.js"
   ],
-  "version": "0.0.13",
+  "version": "0.0.14",
   "authors": [
     "Martin Paljak <martin@martinpaljak.net>"
   ],
