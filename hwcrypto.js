@@ -1,5 +1,6 @@
-/*! This is hwcrypto.js 0.0.11 generated on 2017-01-25 */
+/*! This is hwcrypto.js 0.0.13 generated on 2018-02-25 */
 /* DO NOT EDIT (use src/hwcrypto.js) */
+
 var hwcrypto = function hwcrypto() {
     "use strict";
     var _debug = function(x) {};
@@ -48,6 +49,7 @@ var hwcrypto = function hwcrypto() {
     var USER_CANCEL = "user_cancel";
     var NO_CERTIFICATES = "no_certificates";
     var INVALID_ARGUMENT = "invalid_argument";
+    var DRIVER_ERROR = "driver_error";
     var TECHNICAL_ERROR = "technical_error";
     var NO_IMPLEMENTATION = "no_implementation";
     var NOT_ALLOWED = "not_allowed";
@@ -74,7 +76,10 @@ var hwcrypto = function hwcrypto() {
                 return USER_CANCEL;
 
               case 2:
-                return INVALID_ARGUMENT;
+                return NO_CERTIFICATES;
+
+              case 15:
+                return DRIVER_ERROR;
 
               case 17:
                 return INVALID_ARGUMENT;
@@ -109,7 +114,8 @@ var hwcrypto = function hwcrypto() {
             }
             return new Promise(function(resolve, reject) {
                 try {
-                    var v = p.getCertificate();
+                    var ver = p.version.split(".");
+                    var v = ver[0] >= 3 && ver[1] >= 13 ? p.getCertificate(options.filter) : p.getCertificate();
                     if (parseInt(p.errorCode) !== 0) {
                         reject(code2err(p.errorCode));
                     } else {
@@ -130,7 +136,9 @@ var hwcrypto = function hwcrypto() {
                 if (cid) {
                     try {
                         var language = options.lang || "en";
-                        var v = p.sign(cid, hash.hex, language);
+                        var info = options.info || "";
+                        var ver = p.version.split(".");
+                        var v = ver[0] >= 3 && ver[1] >= 13 ? p.sign(cid, hash.hex, language, info) : p.sign(cid, hash.hex, language);
                         resolve({
                             hex: v
                         });
@@ -262,7 +270,7 @@ var hwcrypto = function hwcrypto() {
     };
     fields.debug = function() {
         return new Promise(function(resolve, reject) {
-            var hwversion = "hwcrypto.js 0.0.11";
+            var hwversion = "hwcrypto.js 0.0.13";
             _autodetect().then(function(result) {
                 _backend.getVersion().then(function(version) {
                     resolve(hwversion + " with " + _backend._name + " " + version);
